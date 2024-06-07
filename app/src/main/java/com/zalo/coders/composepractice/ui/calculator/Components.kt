@@ -75,16 +75,18 @@ fun AnswerView(operation: String, result: String, modifier: Modifier = Modifier)
         verticalArrangement = Arrangement.Bottom
     ) {
         Text(text = operation, color = Color.Gray)
-        Text(text = result, fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color.Black)
+        Text(text = result, fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Color.Black)
     }
 }
 
 @Composable
 fun NumberPad(
     modifier: Modifier = Modifier,
+    currentOperation: String,
     onClick: (String) -> Unit,
     onEquals: () -> Unit,
-    onClear: () -> Unit
+    onClear: () -> Unit,
+    onClearAll: () -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
@@ -104,6 +106,21 @@ fun NumberPad(
                     "C" -> {
                         onClear.invoke()
                     }
+
+                    "AC" -> {
+                        onClearAll.invoke()
+                    }
+
+                    "%", "*", "/", "-", "+" -> {
+                        if (currentOperation.isEmpty() || !currentOperation.last().isDigit()) {
+                            onClick.invoke("")
+                        }else{
+                            if (isValidInput(valueClicked)) {
+                                onClick.invoke(valueClicked)
+                            }
+                        }
+                    }
+
                     else -> {
                         if (isValidInput(valueClicked)) {
                             onClick.invoke(valueClicked)

@@ -17,19 +17,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zalo.coders.composepractice.ui.theme.ComposePracticeTheme
-
-
 /**
 Created by zaloaustine in 6/7/24.
  */
 @Composable
 fun CalculatorScreen(modifier: Modifier = Modifier) {
 
-    val viewModel:CalculatorViewModel  = viewModel()
+    val viewModel: CalculatorViewModel = viewModel()
 
     var idDarkMode by remember { mutableStateOf(false) }
-    var operation = viewModel.operation.collectAsState()
-    var result  = viewModel.result.collectAsState()
+    val operation = viewModel.operation.collectAsState()
+    val result = viewModel.result.collectAsState()
 
     ComposePracticeTheme(darkTheme = idDarkMode) {
         Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
@@ -41,18 +39,16 @@ fun CalculatorScreen(modifier: Modifier = Modifier) {
                 DarkModeSelectorView(idDarkMode) { idDarkMode = it }
                 Spacer(modifier = Modifier.height(48.dp))
                 AnswerView(operation = operation.value, result = result.value)
-                NumberPad(onClick = { clickValue ->
-                    viewModel.updateOperation(clickValue)
-                }, onEquals = {
-                    viewModel.updateResult()
-                }, onClear = {
-                    viewModel.updateOperation(isClear = true)
-                })
+                NumberPad(
+                    currentOperation = operation.value,
+                    onClick = { clickValue -> viewModel.updateOperation(clickValue) },
+                    onEquals = { viewModel.updateResult() },
+                    onClear = { viewModel.updateOperation(isClear = true) },
+                    onClearAll = { viewModel.clearAll() })
             }
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
