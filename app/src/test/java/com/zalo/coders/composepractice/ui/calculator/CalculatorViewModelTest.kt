@@ -11,7 +11,6 @@ class CalculatorViewModelTest {
 
     private val viewModel = CalculatorViewModel()
 
-
     @Test
     fun testInitialState() {
         assertEquals("", viewModel.state.operation)
