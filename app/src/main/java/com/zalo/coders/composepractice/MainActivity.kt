@@ -12,11 +12,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.ExperimentalSafeArgsApi
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.zalo.coders.composepractice.ui.calculator.CalculatorScreen
+import com.zalo.coders.composepractice.ui.calculator.CalculatorViewModel
 import kotlinx.coroutines.delay
 import kotlinx.serialization.Serializable
 
@@ -47,10 +49,13 @@ class MainActivity : ComponentActivity() {
                 }
 
                 composable<Calculator> {
-                    CalculatorScreen()
+                    val calculatorViewModel: CalculatorViewModel = viewModel()
+                    CalculatorScreen(
+                        calculatorState = calculatorViewModel.state,
+                        onAction = calculatorViewModel::onAction
+                    )
                 }
             }
-
         }
     }
 }
