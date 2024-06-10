@@ -12,6 +12,9 @@ navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.8.0-alpha07"
 serialization = "1.6.3"
 mozzilla = "1.7R4"
+hiltAndroid = "2.49"
+android-hilt = "1.2.0"
+mockito = "4.0.0"
 
 
 [libraries]
@@ -35,8 +38,14 @@ androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navig
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization"}
 mozilla-rhino = {module = "org.mozilla:rhino",version.ref ="mozzilla"}
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroid" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "android-hilt" }
+mockito-koltin = {module = "org.mockito.kotlin:mockito-kotlin",version.ref="mockito"}
+mockito-core = {module = "org.mockito:mockito-core",version.ref="mockito"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = {id ="org.jetbrains.kotlin.plugin.serialization" ,version.ref = "kotlin"}
+dagger-hilt = {id ="com.google.dagger.hilt.android" ,version.ref = "hiltAndroid"}

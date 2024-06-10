@@ -1,4 +1,4 @@
-package com.zalo.coders.composepractice.ui.calculator
+package com.zalo.coders.composepractice.calculator.ui
 
 
 /**

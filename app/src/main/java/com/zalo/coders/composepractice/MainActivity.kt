@@ -12,17 +12,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.ExperimentalSafeArgsApi
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.zalo.coders.composepractice.ui.calculator.CalculatorScreen
-import com.zalo.coders.composepractice.ui.calculator.CalculatorViewModel
+import com.zalo.coders.composepractice.calculator.ui.CalculatorScreen
+import com.zalo.coders.composepractice.calculator.ui.CalculatorViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.serialization.Serializable
 
 @OptIn(ExperimentalSafeArgsApi::class)
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,13 +45,14 @@ class MainActivity : ComponentActivity() {
                     }
 
                     LaunchedEffect(null) {
+
                         delay(2000)
                         navController.navigate(Calculator)
                     }
                 }
 
                 composable<Calculator> {
-                    val calculatorViewModel: CalculatorViewModel = viewModel()
+                    val calculatorViewModel: CalculatorViewModel = hiltViewModel()
                     CalculatorScreen(
                         calculatorState = calculatorViewModel.state,
                         onAction = calculatorViewModel::onAction

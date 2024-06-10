@@ -1,4 +1,4 @@
-package com.zalo.coders.composepractice.ui.calculator
+package com.zalo.coders.composepractice.calculator.components
 
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.LinearEasing
@@ -30,6 +30,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zalo.coders.composepractice.R
+import com.zalo.coders.composepractice.calculator.core.getColor
+import com.zalo.coders.composepractice.calculator.core.isValidInput
+import com.zalo.coders.composepractice.calculator.core.padItems
 
 
 /**
@@ -144,7 +147,9 @@ fun CircleWithText(text: String, modifier: Modifier = Modifier, onClick: (String
             .size(100.dp)
             .padding(8.dp)
             .background(color = getColor(text), shape = CircleShape)
-            .clickable { onClick.invoke(text) },
+            .clickable { onClick.invoke(text) }
+            .testTag("CircleWithText")
+        ,
         contentAlignment = Alignment.Center
     ) {
         Text(text = text, color = Color.White, fontSize = 18.sp)
