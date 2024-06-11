@@ -17,8 +17,8 @@ import androidx.navigation.ExperimentalSafeArgsApi
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.zalo.coders.composepractice.calculator.ui.CalculatorScreen
-import com.zalo.coders.composepractice.calculator.ui.CalculatorViewModel
+import com.zalo.coders.calculator.ui.CalculatorScreen
+import com.zalo.coders.calculator.ui.CalculatorViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.serialization.Serializable
