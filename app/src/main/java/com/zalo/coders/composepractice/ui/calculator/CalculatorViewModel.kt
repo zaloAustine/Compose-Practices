@@ -1,48 +1,67 @@
 package com.zalo.coders.composepractice.ui.calculator
 
-import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import org.mozilla.javascript.Context
 import org.mozilla.javascript.Scriptable
-
 
 /**
 Created by zaloaustine in 6/7/24.
  */
 class CalculatorViewModel : ViewModel() {
-    private val _operation = MutableStateFlow("0")
-    val operation get() = _operation
 
-    private val _result = MutableStateFlow("0")
-    val result get() = _result
+    var state by mutableStateOf(CalculatorState())
+        private set
 
-    fun updateOperation(operation: String = _operation.value, isClear: Boolean = false) {
-        if (isClear) {
-            _operation.value = _operation.value.dropLast(1)
-        }else {
-            _operation.value = _operation.value.plus(operation)
+    fun onAction(calculatorAction: CalculatorAction) {
+        when (calculatorAction) {
+            is CalculatorAction.Calculate -> {
+                updateResult()
+            }
+
+            is CalculatorAction.Delete -> {
+                updateOperation(isClear = calculatorAction.isClear)
+            }
+
+            is CalculatorAction.NumberClicked -> {
+                updateOperation(operation = calculatorAction.number)
+            }
+
+            CalculatorAction.DeleteAll -> clearAll()
+        }
+    }
+
+    private fun updateOperation(operation: String = state.operation, isClear: Boolean = false) {
+        state = if (isClear) {
+            state.copy(operation = state.operation.dropLast(1))
+        } else {
+            state.copy(operation = state.operation.plus(operation))
         }
         updateResult()
     }
 
-    fun updateResult() {
+    private fun updateResult() {
         try {
-            if(_operation.value != "0" && _operation.value.isNotBlank()) {
+            if (state.operation != "0" && state.operation.isNotBlank()) {
                 val context: Context = Context.enter()
                 context.optimizationLevel = -1
                 val scriptable: Scriptable = context.initStandardObjects()
 
-                var finalResult = context.evaluateString(scriptable, operation.value, "Javascript", 1, null).toString()
+                var finalResult =
+                    context.evaluateString(scriptable, state.operation, "Javascript", 1, null)
+                        .toString()
                 if (finalResult.endsWith(".0")) {
                     finalResult = finalResult.replace(".0", "")
                 }
-                _result.value = finalResult
+                state = state.copy(result = finalResult)
             }
-        } catch (_: Exception) {}
+        } catch (_: Exception) {
+        }
     }
 
-    fun clearAll() {
-        _operation.value = ""
+    private fun clearAll() {
+        state = state.copy(operation = "")
     }
 }

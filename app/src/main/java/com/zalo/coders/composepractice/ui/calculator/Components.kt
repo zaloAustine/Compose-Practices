@@ -66,7 +66,7 @@ fun DarkModeSelectorView(
 }
 
 @Composable
-fun AnswerView(operation: String, result: String, modifier: Modifier = Modifier) {
+fun AnswerView(operation: String, result: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -83,10 +83,10 @@ fun AnswerView(operation: String, result: String, modifier: Modifier = Modifier)
 fun NumberPad(
     modifier: Modifier = Modifier,
     currentOperation: String,
-    onClick: (String) -> Unit,
-    onEquals: () -> Unit,
-    onClear: () -> Unit,
-    onClearAll: () -> Unit,
+    numberClicked: (String) -> Unit,
+    calculate: () -> Unit,
+    delete: () -> Unit,
+    deleteAll: () -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
@@ -100,32 +100,32 @@ fun NumberPad(
             CircleWithText(text = padItems[it]) { valueClicked ->
                 when (text) {
                     "=" -> {
-                        onEquals.invoke()
+                        calculate.invoke()
                     }
 
                     "C" -> {
-                        onClear.invoke()
+                        delete.invoke()
                     }
 
                     "AC" -> {
-                        onClearAll.invoke()
+                        deleteAll.invoke()
                     }
 
                     "%", "*", "/", "-", "+" -> {
                         if (currentOperation.isEmpty() || !currentOperation.last().isDigit()) {
-                            onClick.invoke("")
+                            numberClicked.invoke("")
                         }else{
                             if (isValidInput(valueClicked)) {
-                                onClick.invoke(valueClicked)
+                                numberClicked.invoke(valueClicked)
                             }
                         }
                     }
 
                     else -> {
                         if (isValidInput(valueClicked)) {
-                            onClick.invoke(valueClicked)
+                            numberClicked.invoke(valueClicked)
                         } else {
-                            onClick.invoke("")
+                            numberClicked.invoke("")
                         }
                     }
                 }
