@@ -1,5 +1,7 @@
 package com.zalo.coders.calculator.core
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 
@@ -15,19 +17,17 @@ fun isValidInput(newValue: String): Boolean {
     return newValue.matches(validStartsWithNumber) || newValue.matches(validStartsWithOperator)
 }
 
+@Composable
 fun getColor(text: String): Color {
-    val gray = Color(0xFFD3D3D3)
+    val gray = MaterialTheme.colorScheme.secondary
     val orange = Color(0xFFFFA500)
-    val black = Color(0xFF817D7D)
-    val green = Color(0xFF4CAF50)
-
+    val black = MaterialTheme.colorScheme.tertiary
     val defaultColor = Color.Gray
 
     val color = when (text) {
         "%", "*", "/" -> gray
-        "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "AC" -> black
-        "C", "-", "+", "H" -> orange
-        "=" -> green
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "." -> black
+        "AC","C", "-", "+", "H" ,"="-> orange
         else -> defaultColor
     }
     return color
@@ -49,7 +49,6 @@ val padItems = listOf(
     "1",
     "2",
     "3",
-    "H",
     "AC",
     "0",
     ".",

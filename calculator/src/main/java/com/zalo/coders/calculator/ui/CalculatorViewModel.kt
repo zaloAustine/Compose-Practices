@@ -13,7 +13,8 @@ Created by zaloaustine in 6/7/24.
  */
 
 @HiltViewModel
-class CalculatorViewModel @Inject constructor(private val calculatorManager: CalculatorManager) : ViewModel() {
+class CalculatorViewModel @Inject constructor(private val calculatorManager: CalculatorManager) :
+    ViewModel() {
 
     var state by mutableStateOf(CalculatorState())
         private set
@@ -38,6 +39,10 @@ class CalculatorViewModel @Inject constructor(private val calculatorManager: Cal
 
     private fun updateOperation(operation: String = state.operation, isClear: Boolean = false) {
         state = if (isClear) {
+            if (state.operation.isBlank()) {
+                state = state.copy(result = "0")
+                return
+            }
             state.copy(operation = state.operation.dropLast(1))
         } else {
             state.copy(operation = state.operation.plus(operation))
@@ -55,6 +60,6 @@ class CalculatorViewModel @Inject constructor(private val calculatorManager: Cal
     }
 
     private fun clearAll() {
-        state = state.copy(operation = "")
+        state = state.copy(operation = "", result = "0")
     }
 }

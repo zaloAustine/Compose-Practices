@@ -12,9 +12,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridItemSpanScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
@@ -34,6 +37,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zalo.coders.calculator.R
@@ -87,12 +91,19 @@ fun AnswerView(operation: String, result: String) {
         horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.Bottom
     ) {
-        Text(text = operation, color = MaterialTheme.colorScheme.primary)
+        Text(
+            text = operation,
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 18.sp,
+            fontFamily = FontFamily.Monospace
+        )
         Text(
             text = result,
-            fontSize = 32.sp,
+            fontSize = 38.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
+            fontFamily = FontFamily.Monospace
+
         )
     }
 }
@@ -113,7 +124,14 @@ fun NumberPad(
             .padding(12.dp),
         verticalArrangement = Arrangement.Bottom
     ) {
-        items(padItems.size) {
+
+        items(padItems.size, span = {
+            if (padItems[it] == "0") {
+                GridItemSpan(2)
+            } else {
+                GridItemSpan(1)
+            }
+        }) {
             val text = padItems[it]
             CircleWithText(text = padItems[it]) { valueClicked ->
                 when (text) {
@@ -150,20 +168,39 @@ fun NumberPad(
             }
         }
     }
+
 }
 
 @Composable
 fun CircleWithText(text: String, modifier: Modifier = Modifier, onClick: (String) -> Unit) {
     Box(
         modifier = modifier
-            .aspectRatio(1f)
-            .size(100.dp)
+            .size(95.dp)
+            .clickable { onClick.invoke(text) }
             .padding(8.dp)
             .background(color = getColor(text), shape = CircleShape)
-            .clickable { onClick.invoke(text) }
             .testTag("CircleWithText"),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = text, color = Color.White, fontSize = 32.sp, fontFamily = FontFamily.Cursive)
+        if (text == "0") {
+            Text(
+                text = text,
+                color = Color.White,
+                fontSize = 32.sp,
+                fontFamily = FontFamily.Monospace,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp),
+                textAlign = TextAlign.Start
+            )
+        } else {
+            Text(
+                text = text,
+                color = Color.White,
+                fontSize = 32.sp,
+                fontFamily = FontFamily.Monospace,
+                textAlign = TextAlign.Start
+            )
+        }
     }
 }
