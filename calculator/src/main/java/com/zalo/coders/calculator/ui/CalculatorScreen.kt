@@ -1,10 +1,12 @@
 package com.zalo.coders.calculator.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,7 +33,7 @@ fun CalculatorScreen(
     var idDarkMode by remember { mutableStateOf(false) }
 
     CalculatorTheme(darkTheme = idDarkMode) {
-        Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
+        Scaffold(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) { padding ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()

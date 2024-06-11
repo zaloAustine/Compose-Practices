@@ -15,7 +15,6 @@ fun isValidInput(newValue: String): Boolean {
     return newValue.matches(validStartsWithNumber) || newValue.matches(validStartsWithOperator)
 }
 
-
 fun getColor(text: String): Color {
     val gray = Color(0xFFD3D3D3)
     val orange = Color(0xFFFFA500)
@@ -27,7 +26,7 @@ fun getColor(text: String): Color {
     val color = when (text) {
         "%", "*", "/" -> gray
         "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "AC" -> black
-        "C", "-", "+", "HIS" -> orange
+        "C", "-", "+", "H" -> orange
         "=" -> green
         else -> defaultColor
     }
@@ -50,7 +49,7 @@ val padItems = listOf(
     "1",
     "2",
     "3",
-    "HIS",
+    "H",
     "AC",
     "0",
     ".",
