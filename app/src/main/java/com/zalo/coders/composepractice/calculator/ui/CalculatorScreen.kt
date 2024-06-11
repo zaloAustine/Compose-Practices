@@ -1,4 +1,4 @@
-package com.zalo.coders.composepractice.ui.calculator
+package com.zalo.coders.composepractice.calculator.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +14,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.zalo.coders.composepractice.calculator.components.AnswerView
+import com.zalo.coders.composepractice.calculator.components.DarkModeSelectorView
+import com.zalo.coders.composepractice.calculator.components.NumberPad
 import com.zalo.coders.composepractice.ui.theme.ComposePracticeTheme
 
 /**

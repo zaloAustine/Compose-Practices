@@ -1,4 +1,4 @@
-package com.zalo.coders.composepractice.ui.calculator
+package com.zalo.coders.composepractice.calculator.core
 
 import androidx.compose.ui.graphics.Color
 
@@ -8,7 +8,6 @@ Created by zaloaustine in 6/7/24.
  */
 fun isValidInput(newValue: String): Boolean {
     // Define the allowed characters and patterns
-    val allowedCharacters = "0123456789+-*/%."
     val validStartsWithNumber = "^\\d[\\d+\\-*/%]*$".toRegex()
     val validStartsWithOperator = "^[+\\-*/%]\\d*[\\d+\\-*/%]*$".toRegex()
 
