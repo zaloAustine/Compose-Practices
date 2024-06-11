@@ -9,10 +9,13 @@ plugins {
 android {
     namespace = "com.zalo.coders.calculator"
     compileSdk = 34
-    buildFeatures{
+    buildFeatures {
         compose = true
     }
 
+    defaultConfig {
+        minSdk = 24
+    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
