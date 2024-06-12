@@ -1,3 +1,6 @@
+Working on a variety of small applications to master Compose and MVI
+
+1. Calculator
 <table>
 <tr>
 <td>
