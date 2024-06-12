@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "ComposePractice"
 include(":app")
 include(":calculator")
+include(":note-app")
