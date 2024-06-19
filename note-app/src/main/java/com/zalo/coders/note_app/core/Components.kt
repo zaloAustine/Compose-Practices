@@ -6,20 +6,31 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.sharp.AddCircle
+import androidx.compose.material.icons.sharp.Search
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.SuggestionChipDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
@@ -123,6 +134,66 @@ fun NoteItem() {
     }
 }
 
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopBar(onAddIconClicked: () -> Unit) {
+    TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.background,
+            titleContentColor = MaterialTheme.colorScheme.primary
+        ),
+        title = {
+            Text(
+                text = "My Notes",
+                style = MaterialTheme.typography.titleLarge,
+                color = Color.Black
+            )
+        },
+        actions = {
+            IconButton(onClick = { onAddIconClicked.invoke() }) {
+                Icon(
+                    imageVector = Icons.Sharp.AddCircle,
+                    contentDescription = "Search",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+    )
+}
+
+@Composable
+fun SearchField(modifier: Modifier = Modifier) {
+    TextField(
+        value = "",
+        onValueChange = {},
+        label = {
+            Text(
+                text = "search here",
+                color = Color.Gray,
+                fontFamily = FontFamily.Monospace
+            )
+        },
+        modifier = modifier
+            .padding(12.dp)
+            .height(40.dp)
+            .clip(RoundedCornerShape(50))
+            .fillMaxWidth(),
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Sharp.Search,
+                contentDescription = "Search",
+                tint = MaterialTheme.colorScheme.primary
+            )
+        },
+        colors = TextFieldDefaults.colors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
+        )
+    )
+}
+
 fun getRandomColor(): Color {
     return Color(
         red = Random.nextFloat(),
@@ -137,5 +208,22 @@ fun getRandomColor(): Color {
 fun GreetingPreview() {
     NoteAppTheme {
         NoteItem()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AppBarPreview() {
+    NoteAppTheme {
+        TopBar({})
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun SearchPreview() {
+    NoteAppTheme {
+        SearchField()
     }
 }

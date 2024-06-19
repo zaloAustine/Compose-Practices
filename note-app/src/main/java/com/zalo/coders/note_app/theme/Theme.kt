@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.zalo.coders.calculator.ui.theme.typography
 
 private val DarkColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,

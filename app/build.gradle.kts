@@ -72,6 +72,8 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.mozilla.rhino)
     implementation(project(":calculator"))
+    implementation(project(":note-app"))
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
