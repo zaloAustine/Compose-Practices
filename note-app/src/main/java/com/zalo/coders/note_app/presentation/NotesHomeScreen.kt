@@ -8,17 +8,16 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import com.zalo.coders.calculator.ui.theme.NoteAppTheme
+import androidx.compose.ui.tooling.preview.Preview
 import com.zalo.coders.note_app.core.NoteItem
-
+import com.zalo.coders.note_app.theme.NoteAppTheme
 
 /**
 Created by zaloaustine in 6/12/24.
  */
 
 @Composable
-fun NotesHomeScreen(modifier: Modifier = Modifier) {
+fun NotesHomeScreen() {
     NoteAppTheme {
         Scaffold(Modifier) { paddingValues ->
             Column(
@@ -36,7 +35,7 @@ fun NotesHomeScreen(modifier: Modifier = Modifier) {
     }
 }
 
-@PreviewScreenSizes()
+@Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     NoteAppTheme {

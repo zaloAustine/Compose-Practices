@@ -1,4 +1,4 @@
-package com.zalo.coders.calculator.ui.theme
+package com.zalo.coders.note_app.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.zalo.coders.calculator.ui.theme.typography
 
 private val DarkColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,
@@ -27,16 +28,6 @@ private val LightColorScheme = lightColorScheme(
     secondary = md_theme_light_secondary,
     tertiary = md_theme_light_tertiary,
     background = md_theme_light_background
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
 )
 
 @Composable

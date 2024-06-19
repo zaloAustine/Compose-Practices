@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.zalo.coders.calculator.ui.theme.NoteAppTheme
+import com.zalo.coders.note_app.theme.NoteAppTheme
 import kotlin.random.Random
 
 
@@ -41,6 +42,8 @@ Created by zaloaustine in 6/12/24.
 fun NoteItem() {
 
     val color by remember { mutableStateOf(getRandomColor()) }
+    val configuration = LocalConfiguration.current
+
     Card(
         colors = CardDefaults.cardColors(containerColor = color),
         onClick = { },
@@ -73,24 +76,29 @@ fun NoteItem() {
                         fontSize = 4.sp,
                         color = color.copy(alpha = 0.9f),
                         textAlign = TextAlign.Center
-
                     )
                 }
             )
             Text(
-                "Title text", style = TextStyle(
+                "Title text Title title",
+                style = TextStyle(
                     fontWeight = FontWeight.Bold,
-                    fontSize = MaterialTheme.typography.bodySmall.fontSize,
+                    fontSize = 13.sp,
                     fontFamily = FontFamily.Monospace
                 ),
-                modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+                minLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 8.dp)
+                    .width(configuration.screenWidthDp.dp / 2)
             )
 
             Text(
                 "Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipLorem ipsum dolor sit amet, consetetur sadipconsetetur sadipLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore tempor invidunt ut ooore e coloreLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut ooore e colore",
                 style = TextStyle(
-                    fontSize = 12.sp,
+                    fontSize = 13.sp,
                     fontFamily = FontFamily.SansSerif,
+                    color = Color.Gray
                 ),
                 maxLines = 6,
                 overflow = TextOverflow.Ellipsis,
@@ -103,7 +111,8 @@ fun NoteItem() {
                 "Title text",
                 style = TextStyle(
                     fontSize = 6.sp,
-                    fontFamily = FontFamily.SansSerif
+                    fontFamily = FontFamily.SansSerif,
+                    color = color.copy(alpha = 1f)
                 ),
                 modifier = Modifier
                     .padding(8.dp)
